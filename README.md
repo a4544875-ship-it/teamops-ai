@@ -1,46 +1,25 @@
-# TeamOps AI — GitHub Pages 測試版
+# 🌷 TeamOps AI — Carlos 的主管工作助理
 
-這是 **純靜態網站**，用於 Carlos 個人測試案件記事、待辦、五位工程師行程及安排建議。預設不含任何真實客戶／組員私人行程。
+GitHub Pages 網站： https://a4544875-ship-it.github.io/teamops-ai/
 
-## 部署至 GitHub Pages
+單人主管用的案件管理、客戶與工程師資料、私人待辦、團隊日曆與行程提醒。
 
-1. 在 GitHub 建立一個新 repository，例如 `teamops-ai`。
-2. 將本資料夾中的 **`index.html`、`manifest.webmanifest`、`icon.svg`、`sw.js`、`.nojekyll`** 上傳至 repository **根目錄**（不要多包一層資料夾）。README 與 .gitignore 也可以一起上傳。
-3. 開啟 repository 的 **Settings → Pages**，在 **Build and deployment** 選 **Deploy from a branch**。
-4. 選擇 `main`、`/(root)` 並 **Save**。
-5. 網址通常是 `https://<你的帳號>.github.io/teamops-ai/`；請等 GitHub 顯示部署成功，再開啟。
+## 功能
+- 奶油白／柔粉／深色主題，手機桌面 PWA
+- 案件、筆記、待辦、行程、組員、客戶可新增、編輯、刪除
+- 案件進度紀錄可修改與刪除；刪除案件會保留相關待辦／筆記並解除關聯
+- 五位初始成員：Carlos、Ted、Duan、Beck、Danny；可自行新增或移除
+- Google Calendar ICS 匯入；另提供 OAuth 唯讀同步（需額外設定）
+- JSON 備份、還原；瀏覽器本機離線可用
+- Supabase Auth 登入與私人雲端同步（先登入並完成首次資料遷移）
 
-也可以用 Git 指令：
-```bash
-git init
-git add .
-git commit -m "Deploy TeamOps AI static MVP"
-git branch -M main
-git remote add origin https://github.com/<你的帳號>/teamops-ai.git
-git push -u origin main
-```
-（使用 Git 指令前，先在 GitHub 建立空 repository。）
+## 新版雲端資料
+獨立 Supabase Free 專案 `teamops-ai`，資料存取以 authenticated 使用者 ID 的 RLS 控制，雲端資料與 GitHub 公開程式碼完全分離。登入後遇到雲端／本機資料差異會提示選擇；跨裝置版本衝突時會停止上傳以避免靜默覆蓋。
 
-## 注意：這不是有登入保護的私人網站
+**目前狀態：** 雲端後端與介面已接入，但首次 Email 註冊／驗證、跨裝置實際測試尚待 Carlos 操作確認。參見 [完整設定步驟](supabase/DEPLOYMENT.md)。
 
-- **GitHub Pages 網址可被其他人開啟**。即使把 repo 設為 private，也不應視為 Pages 已受到身分驗證保護。
-- 程式碼、範例及公開 assets 會提供給訪客；**不要上傳備份 JSON、ICS、客戶清單、密碼、金鑰、OAuth token 或真實案件資料**。
-- 現階段案件資料只存在使用者自己的瀏覽器 `localStorage`，不會上傳 GitHub，也不會跨 Windows/iPhone 同步。若在別人的裝置開啟網站，該裝置的使用者可看到自己在該瀏覽器輸入的資料。
-- 從 `file://` 版移到 GitHub Pages 後，資料**不會自動搬移**：先匯出 JSON，再到新網址匯入。請保管備份，不要提交到 GitHub。
-- 若是公司真實機密資料，建議先僅使用原本離線 HTML；等未來做登入、存取控制及加密後再將正式資料移到線上。
-- PWA／Service Worker 只快取**公用應用程式檔案**，不快取案件資料。第一次開啟需有網路，之後可嘗試離線開啟；Safari/iOS 的離線保存由瀏覽器政策決定，無法保證永久保存。
-- 日曆是手動建立或匯入 ICS，**不會自動連 Google Calendar**；本機提醒不是推播通知，也未串接 AI 模型。
+## Google Calendar 唯讀
+需 Carlos 自行建立 Google Cloud Web OAuth Client，允許來源 `https://a4544875-ship-it.github.io`，並啟用 Google Calendar API。填入 OAuth Client ID，授權後將 Google 日曆 ID 對應到工程師，再執行同步。OAuth 權杖僅在當前瀏覽器頁面記憶體保留，不會被寫入 GitHub 或資料庫。**本版不會在關閉網站後背景同步**，如需背景同步必須增加安全後端的授權管理。
 
-## 版本更新
-
-更新檔案後 push 到 `main`，GitHub Pages 將重新部署。更新 `sw.js` 中的 CACHE_NAME 版本，避免離線快取保留舊版；請不要刪除使用者瀏覽器資料，必要時重新整理頁面。
-
-## 測試清單
-
-- [ ] 電腦開啟首頁；淺色、粉色、深色切換正常
-- [ ] 建立案件、待辦、行程，再刷新頁面，資料仍在
-- [ ] 載入示範資料（不是真實資料）
-- [ ] JSON 匯出 → 匯入還原成功
-- [ ] 五位成員 Carlos、Ted、Duan、Beck、Danny 都存在
-- [ ] iPhone Safari 開啟並加入主畫面
-- [ ] 第一次連線載入後斷網，再試離線打開
+## 安全
+請勿上傳公司客戶資料、日曆 ICS、JSON 備份、任何密碼或 API Secret 到 GitHub。Supabase publishable key 可以放前端，但 secret / service_role key 絕不可放前端。登入過的共用電腦請登出並清除網站資料，定期匯出加密保存備份。
