@@ -1,0 +1,17 @@
+# Do not commit private team/customer data
+*.ics
+*.json
+!package.json
+!*.webmanifest
+*.csv
+*.xlsx
+*.xls
+*.sqlite
+*.db
+*.env
+.env.*
+backups/
+private/
+node_modules/
+.DS_Store
+Thumbs.db
