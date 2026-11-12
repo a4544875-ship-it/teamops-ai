@@ -1,6 +1,6 @@
 // Only public application files are cached; private records stay in browser storage.
-const CACHE_NAME = 'teamops-static-v1-github';
-const APP_FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
+const CACHE_NAME = 'teamops-static-v2-cloud';
+const APP_FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg', './cloud.js', './google-calendar.js'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES)).then(() => self.skipWaiting()));
 });
