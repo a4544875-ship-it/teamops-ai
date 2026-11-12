@@ -1,0 +1,18 @@
+{
+  "name": "TeamOps AI — Carlos 的主管小幫手",
+  "short_name": "TeamOps AI",
+  "description": "主管案件、待辦、團隊日曆的本機工作空間",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f8f4",
+  "theme_color": "#f7f8f4",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
