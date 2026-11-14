@@ -1,6 +1,6 @@
 // Only public application files are cached; private records stay in browser storage.
 const CACHE_NAME = 'teamops-v2-preview-static';
-const APP_FILES = ['./', './index.html', './styles.css', './core.js', './app.js', './cloud-v2.js', './icon.svg'];
+const APP_FILES = ['./', './index.html', './styles.css', './icons.js', './core.js', './app.js', './cloud-v2.js', './icon.svg'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES)).then(() => self.skipWaiting()));
 });
