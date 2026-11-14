@@ -30,3 +30,12 @@ aside{background:#edf7f1;border-color:#dcece2}header{background:#ffffffb8}.brand
 
 /* Production sign-in hides all private views until the account is loaded. */
 body.locked>.app{display:none}#authGate[hidden]{display:none}#authGate{width:min(560px,calc(100% - 32px));margin:9vh auto;padding:34px;background:var(--panel);border:1px solid var(--line);border-radius:26px;text-align:center;box-shadow:var(--shadow)}#authGate .welcome-bear{width:100px;height:100px;margin:0 auto 20px}#authGate h1{font-size:28px;margin-bottom:14px}#authGate p{margin:14px 0;line-height:1.9}#authGate button{margin:12px 0;min-width:220px}.release-banner{background:#e4f3e9}
+/* Desktop density matches the previously preferred 75% view at browser 100%. */
+@media(min-width:801px){
+ html{zoom:.75}
+ .app{min-height:calc(100dvh / .75)}
+ aside{height:calc(100dvh / .75)}
+ .drawer{height:calc(100dvh / .75);min-height:calc(100dvh / .75);max-height:calc(100dvh / .75)}
+ .drawer #drawerBody{height:calc(100dvh / .75)}
+ dialog:not(.drawer){max-height:calc(90dvh / .75)}
+}
