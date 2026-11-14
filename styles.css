@@ -39,3 +39,7 @@ body.locked>.app{display:none}#authGate[hidden]{display:none}#authGate{width:min
  .drawer #drawerBody{height:calc(100dvh / .75)}
  dialog:not(.drawer){max-height:calc(90dvh / .75)}
 }
+
+/* Simple case notes and actionable dashboard cards. */
+button.stat{text-align:left;font-weight:400;width:100%;cursor:pointer;transition:box-shadow .15s,border-color .15s}button.stat:hover{border-color:var(--accent);box-shadow:0 5px 18px #4d786320}button.stat:focus-visible{outline:3px solid #91bba0;outline-offset:3px}
+#pDescription{min-height:260px;resize:vertical;overflow-y:hidden;line-height:1.8}
