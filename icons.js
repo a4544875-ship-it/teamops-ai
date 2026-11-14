@@ -11,9 +11,9 @@ settings:'<path fill="#d5dfed" d="m12 3 9 1 2 6 6 4-2 10-6 2-4 5-9-4-1-6-5-5 4-8
 search:'<circle cx="14" cy="13" r="9" fill="#dcebe0"/><circle cx="14" cy="13" r="5" fill="#fffdf7" stroke="none"/><path d="m21 20 8 8" stroke-width="4"/>',
 repair:'<path fill="#ebc5bf" d="M20 4a8 8 0 0 0-9 10L3 24l5 5 10-9A8 8 0 0 0 29 9l-6 5-5-4z"/>',
 bolt:'<path fill="#d6c5e5" d="m18 2-12 17h9l-1 12 13-18h-9z"/>',
-flower:'<path d="M16 19v12m0-5q-9-8-11-2 5 7 11 2" fill="#a9cbb0"/><path fill="#eab9b7" d="M16 5c-7-8-13 1-7 6-10 0-8 11 0 10-3 9 8 12 10 3 7 6 14-3 7-8 9-4 3-14-4-9 1-9-10-10-6-2z"/><circle cx="16" cy="15" r="5" fill="#f8dc8e"/>',
+bear:'<circle cx="8" cy="9" r="6" fill="#d7b17c"/><circle cx="25" cy="9" r="6" fill="#d7b17c"/><ellipse cx="16" cy="19" rx="14" ry="13" fill="#d7b17c"/><ellipse cx="16" cy="24" rx="7" ry="5" fill="#fff5df" stroke="none"/><circle cx="11" cy="17" r="1.3" fill="currentColor"/><circle cx="22" cy="17" r="1.3" fill="currentColor"/><path d="m14 21 2 2 2-2M16 23v2m-4 0q4 5 8 0"/>',
 plus:'<path d="M16 7v18M7 16h18"/>',close:'<path d="m9 9 14 14M23 9 9 23"/>'};
-const aliases={'⌂':'home','▧':'folder','☑':'task','♧':'people','✧':'bell','▤':'note','♲':'trash','⚙':'settings','⌕':'search','⚒':'repair','ϟ':'bolt','✿':'flower','＋':'plus','✕':'close'};
-function icon(name){return '<svg class="friendly-icon" viewBox="0 0 32 34" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+(shapes[name]||shapes.flower)+'</svg>'}
+const aliases={'⌂':'home','▧':'folder','☑':'task','♧':'people','✧':'bell','▤':'note','♲':'trash','⚙':'settings','⌕':'search','⚒':'repair','ϟ':'bolt','✿':'bear','＋':'plus','✕':'close'};
+function icon(name){return '<svg class="friendly-icon" viewBox="0 0 32 34" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+(shapes[name]||shapes.bear)+'</svg>'}
 function decorate(root=document){for(const el of root.querySelectorAll('.glyph,.type-icon,.stat-icon,.brand-icon,[data-icon]')){const name=el.dataset.icon||aliases[el.textContent.trim()];if(name)el.innerHTML=icon(name)}for(const el of root.querySelectorAll('h2')){const n=el.firstChild;if(n?.nodeType===3&&aliases[n.textContent.trim()[0]]){const text=n.textContent.trim(),span=document.createElement('span');span.className='heading-icon';span.innerHTML=icon(aliases[text[0]]);n.textContent=text.slice(1).trimStart();el.prepend(span)}}}
 return {icon,decorate};})();
