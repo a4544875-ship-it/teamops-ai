@@ -117,6 +117,7 @@ begin
   if key<>'events' and exists(select 1 from jsonb_array_elements(snapshot->key) e group by e->>'id' having count(*)>1) then raise exception 'Duplicate IDs'; end if;
   counts:=counts||jsonb_build_object(key,jsonb_array_length(snapshot->key));
  end loop;
+ if jsonb_array_length(snapshot->'events')>0 or coalesce(jsonb_array_length(snapshot->'legacyArchive'->'events'),0)>0 then raise exception 'Calendar data is not accepted in TeamOps 2.0'; end if;
  insert into public.teamops_v2_workspaces(owner_id) values(who) on conflict do nothing;
  select w.revision,w.initialized,w.events_archive,w.legacy_archive into rev,initialized,old_events,old_legacy
  from public.teamops_v2_workspaces w where w.owner_id=who for update;
